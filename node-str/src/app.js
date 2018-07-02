@@ -10,6 +10,9 @@ const router = express.Router();
 // Connecta ao banco
 mongoose.connect('mongodb://wesley:123Aa321@ds018258.mlab.com:18258/nodestore')
 
+// carrega os models
+const Product = require('./models/product');
+
 // carrega as rotas
 const indexRoute = require('./routes/index-route');
 const productRoute = require('./routes/product-route');
