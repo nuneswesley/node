@@ -41,8 +41,8 @@ exports.getById = (req, res, next) => {
 exports.getByTag = (req, res, next) => {
     Product
         .find({
-            tags:req.params.tag,
-            active:true
+            tags: req.params.tag,
+            active: true
         }, 'title description slug price tags')
         .then(data => {
             res.status(200).send(data);
@@ -68,10 +68,25 @@ exports.post = (req, res, next) => {
 };
 
 exports.put = (req, res, next) => {
-    res.status(200).send({
-        id: req.params.id,
-        item: req.body
-    });
+    Product
+        .findByIdAndUpdate(req.params.id, {
+            $set: {
+                title: req.body.title,
+                description: req.body.description,
+                prince: req.body.prince,
+                slug: req.body.slug,
+                tags: req.body.tags
+            }
+        }).then(x => {
+            res.status(200).send({
+                message: 'Produto atualizar sucesso'
+            });
+        }).catch(e => {
+            res.status(400).send({
+                message: 'Falha ao atualizar produto',
+                data: e
+            })
+        });
 };
 
 exports.delete = (req, res, next) => {
