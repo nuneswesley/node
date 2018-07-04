@@ -29,11 +29,11 @@ exports.getByTag = async (tag) => {
 
 exports.create = async (data) => {
     var product = new Product(data);
-    return await product.save();
+    await product.save();
 }
 
 exports.update = async (id, body) => {
-    return await Product.findByIdAndUpdate(id, {
+    await Product.findByIdAndUpdate(id, {
         $set: {
             title: body.title,
             description: body.description,
@@ -45,5 +45,5 @@ exports.update = async (id, body) => {
 }
 
 exports.delete = async (id) => {
-    return await Product.findByIdAndRemove(id)
+    await Product.findByIdAndRemove(id)
 }
